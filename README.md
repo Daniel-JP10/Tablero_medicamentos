@@ -3,6 +3,8 @@
 > **Auditoría, visualización y storytelling analítico sobre 28.482 dispensaciones farmacéuticas.**  
 > Desarrollado con Next.js 14, WebAssembly SQLite (`sql.js`), Recharts y Tailwind CSS.
 
+**Despliegue en producción:** [https://tablero-medicamentos.vercel.app/](https://tablero-medicamentos.vercel.app/)
+
 ---
 
 ###  Autor
@@ -27,7 +29,7 @@ A diferencia de tableros estáticos tradicionales, **todas las cifras, KPIs y gr
 | **Visualización de Datos** | Recharts v2 | Gráficos reactivos (Áreas temporales, Barras, Donas) |
 | **Animación y Storytelling** | Framer Motion | Efectos de entrada progresiva y conteo animado de métricas |
 | **Estilos y Diseño** | Tailwind CSS + Lucide Icons | Estética profesional Dark Obsidian de alto contraste |
-| **Plataforma de Despliegue** | Vercel | Despliegue en Edge / Serverless Functions |
+| **Plataforma de Despliegue** | Vercel | Despliegue en Edge / Serverless Functions ([Ver demo](https://tablero-medicamentos.vercel.app/)) |
 
 ---
 
