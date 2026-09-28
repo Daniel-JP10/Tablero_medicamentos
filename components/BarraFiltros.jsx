@@ -28,8 +28,8 @@ export default function BarraFiltros({ opciones, filtros, onCambiar }) {
     filtros.regional !== "todas";
 
   return (
-    <div className="sticky top-0 z-40 border-y border-slate-800/80 bg-slate-950/85 backdrop-blur-md shadow-lg shadow-black/20">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3">
+    <div className="sticky top-0 z-30 rounded-t-3xl border-b border-slate-800/90 bg-slate-900/95 px-4 py-3.5 sm:px-6 backdrop-blur-md shadow-md">
+      <div className="flex flex-wrap items-center gap-3">
         <div className="flex items-center gap-2 text-cyan-400 mr-2">
           <SlidersHorizontal size={17} />
           <span className="text-xs font-bold uppercase tracking-wider text-slate-300">Filtros</span>

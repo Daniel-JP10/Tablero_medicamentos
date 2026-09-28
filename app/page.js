@@ -101,11 +101,11 @@ export default function Pagina() {
             <span className="h-2 w-2 rounded-full bg-sky-400 animate-pulse" />
             EPS · Auditoría y Análisis de Dispensación 2020 - 2021
           </div>
-          
+
           <h1 className="mt-5 text-4xl font-black leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
             Cada fórmula dispensada cuenta <span className="bg-gradient-to-r from-sky-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent">una historia de salud</span>
           </h1>
-          
+
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">
             Exploración analítica sobre <strong>28.482 dispensaciones</strong>, <strong>1.000 pacientes</strong> y <strong>10.005 fórmulas médicas</strong> con motor SQL real para entender patrones de costo, adherencia y concentración del gasto farmacéutico.
           </p>
@@ -118,10 +118,13 @@ export default function Pagina() {
         </motion.div>
       </section>
 
-      <BarraFiltros opciones={opcionesFiltro} filtros={filtros} onCambiar={manejarCambioFiltro} />
+      {/* MARCO CONTENEDOR TIPO TABLERO */}
+      <div className="mx-auto max-w-6xl px-4 pb-20">
+        <div className="rounded-3xl border border-slate-700/80 bg-slate-950/60 shadow-2xl backdrop-blur-xl ring-1 ring-white/10">
+          <BarraFiltros opciones={opcionesFiltro} filtros={filtros} onCambiar={manejarCambioFiltro} />
 
-      <div className="mx-auto max-w-6xl space-y-12 px-4 py-12 md:py-16">
-        {/* BLOQUE 1: KPIs que abren la historia */}
+          <div className="space-y-12 p-5 sm:p-7 md:p-10">
+            {/* BLOQUE 1: KPIs que abren la historia */}
         <SeccionRevelada>
           <div className="mb-6 flex flex-col justify-between gap-1 sm:flex-row sm:items-end">
             <div>
@@ -132,7 +135,7 @@ export default function Pagina() {
             </div>
             <p className="text-xs text-slate-400">Métricas agregadas según los filtros seleccionados</p>
           </div>
-          
+
           <div className="grid gap-4 sm:grid-cols-3">
             <TarjetaKpi
               etiqueta="Personas con dispensaciones"
@@ -170,7 +173,7 @@ export default function Pagina() {
                 El costo dispensado presenta fluctuaciones estacionales. Evalúa picos de demanda y el impacto de los filtros de grupo farmacológico en el tiempo.
               </p>
             </div>
-            
+
             {tiempo.length ? (
               <GraficoTiempo datos={tiempo} />
             ) : (
@@ -286,6 +289,8 @@ export default function Pagina() {
         <SeccionRevelada delay={0.05}>
           <SeccionAntidiabeticos datos={antidiabeticos} />
         </SeccionRevelada>
+          </div>
+        </div>
       </div>
 
       {cargando && (
