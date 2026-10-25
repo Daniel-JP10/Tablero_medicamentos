@@ -6,10 +6,13 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useInView, animate } from "framer-motion";
-import { Users, FileText, DollarSign, Activity } from "lucide-react";
+import { Users, FileText, DollarSign, Activity, Coins, Package, Percent } from "lucide-react";
 
-function formatearNumero(valor, esMoneda) {
+function formatearNumero(valor, esMoneda, esPorcentaje) {
   if (valor === null || valor === undefined) return "-";
+  if (esPorcentaje) {
+    return `${Number(valor).toFixed(1)}%`;
+  }
   const redondeado = Math.round(valor);
   if (esMoneda) {
     return new Intl.NumberFormat("es-CO", {
@@ -46,9 +49,28 @@ const estilosAcento = {
     glow: "from-rose-500/10",
     icono: Activity,
   },
+  inversion: {
+    border: "border-cyan-500/30 hover:border-cyan-500/60",
+    badge: "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20",
+    glow: "from-cyan-500/10",
+    icono: Coins,
+  },
+  volumen: {
+    border: "border-indigo-500/30 hover:border-indigo-500/60",
+    badge: "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20",
+    glow: "from-indigo-500/10",
+    icono: Package,
+  },
 };
 
-export default function TarjetaKpi({ etiqueta, valor, esMoneda = false, acento = "eps", descripcion }) {
+export default function TarjetaKpi({
+  etiqueta,
+  valor,
+  esMoneda = false,
+  esPorcentaje = false,
+  acento = "eps",
+  descripcion,
+}) {
   const refNumero = useRef(null);
   const refContenedor = useRef(null);
   const enVista = useInView(refContenedor, { once: true, amount: 0.5 });
@@ -57,23 +79,24 @@ export default function TarjetaKpi({ etiqueta, valor, esMoneda = false, acento =
 
   useEffect(() => {
     if (!enVista || valor === null || valor === undefined) return;
-    const controles = animate(0, valor, {
+    const num = Number(valor) || 0;
+    const controles = animate(0, num, {
       duration: 1.4,
       ease: "easeOut",
       onUpdate(latest) {
         if (refNumero.current) {
-          refNumero.current.textContent = formatearNumero(latest, esMoneda);
+          refNumero.current.textContent = formatearNumero(latest, esMoneda, esPorcentaje);
         }
       },
     });
     return () => controles.stop();
-  }, [enVista, valor, esMoneda]);
+  }, [enVista, valor, esMoneda, esPorcentaje]);
 
   return (
     <motion.div
       ref={refContenedor}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
-      className={`relative overflow-hidden rounded-2xl border ${config.border} bg-slate-900/90 backdrop-blur-md p-6 shadow-xl shadow-black/25 transition-all`}
+      className={`relative overflow-hidden rounded-2xl border ${config.border} bg-slate-900/90 backdrop-blur-md p-5 sm:p-6 shadow-xl shadow-black/25 transition-all`}
     >
       <div className={`pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full bg-gradient-to-br ${config.glow} to-transparent blur-2xl`} />
       
@@ -84,7 +107,7 @@ export default function TarjetaKpi({ etiqueta, valor, esMoneda = false, acento =
         </div>
       </div>
       
-      <p ref={refNumero} className="mt-3 text-3xl font-black tracking-tight text-white">
+      <p ref={refNumero} className="mt-3 text-2xl sm:text-3xl font-black tracking-tight text-white">
         0
       </p>
       
@@ -94,4 +117,3 @@ export default function TarjetaKpi({ etiqueta, valor, esMoneda = false, acento =
     </motion.div>
   );
 }
-
